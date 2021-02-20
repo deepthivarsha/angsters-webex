@@ -1,0 +1,97 @@
+<!--<div>
+    <h1>Send Message</h1>
+</div>
+<hr>-->
+<form #sendMessage="ngForm" class="">
+    <div class="momentum md">
+        <div id="create-room-header" class="md-panel__title">
+            <h4>Send Message</h4>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <label id="connector-lbl" for="company"><span>Select the room(s)</span> </label>
+                </div>
+                <div class="col-sm-4">
+                    <div>
+                        <ng-select [items]="rooms" [maxSelectedItems]="maxSelectedRooms" searchable="true"
+                            bindLabel="title" placeholder="Select a room" appendTo="body" multiple="true"
+                            [(ngModel)]="selectedRooms" #room="ngModel" name="room" (change)="onChange($event)"
+                            required>
+                        </ng-select>
+                    </div>
+                </div>
+                <div id="room-selection-error" class="col-sm-4 md-alert-banner md-alert-banner--info"
+                    *ngIf="selectedRooms.length===maxSelectedRooms">
+                    <div class="md-alert-banner__text">Maximum of 5 rooms are only allowed</div>
+                </div>
+
+            </div>
+        </div>
+        <div class="container">
+            <div *ngIf="selectedRooms?.length > 0">
+                <div id="room-information-header" class="md-panel__title">
+                    <h4>Room Information</h4>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <label class="md-label" id="room-id-lbl" for="roomId"><span>Room ID </span> </label>
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="text" id="roomId" class="md-input custom-input" name="roomId"
+                            [(ngModel)]="roomInfo.id" readonly #roomId="ngModel">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <label class="md-label" id="room-title" for="roomTitle"><span>Room Title </span> </label>
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="text" id="roomTitle" class="md-input custom-input" name="roomTitle"
+                            [(ngModel)]="roomInfo.title" readonly #roomTitle="ngModel">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <label class="md-label" id="created-lbl" for="created"><span>Created Time </span> </label>
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="text" id="created" class="md-input custom-input" name="created"
+                            [(ngModel)]="roomInfo.created" readonly #created="ngModel">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <label class="md-label" id="last-activity-lbl" for="hostName"><span>Last Activity </span>
+                        </label>
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="text" id="lastActivity" class="md-input custom-input" name="lastActivity"
+                            [(ngModel)]="roomInfo.lastActivity" readonly #lastActivity="ngModel">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <label id="connector-lbl" for="company"><span>Text message</span> </label>
+                </div>
+                <div class="col-sm-8">
+                    <input type="text" id="textMsg" class="md-input input" name="textMsg" required [(ngModel)]="message"
+                        #textMsg="ngModel" placeholder="Enter the message">
+                    <span class="reqd">*</span>&nbsp;
+                </div>
+                <div id="text-message-error" class="col-sm-4"
+                    *ngIf="sendMessage.controls.textMsg.invalid && (sendMessage.controls.textMsg.dirty || sendMessage.controls.textMsg.touched)">
+                    <div class="md-alert-banner md-alert-banner--error"
+                        *ngIf="sendMessage.controls.textMsg.errors.required">* Please enter the message</div>
+                </div>
+            </div>
+            <div class="row">
+                <button class="md-button md-button--36 md-button--blue" (click)="sendMessageToSelectedRooms()"
+                    [disabled]="sendMessage.invalid">Send Message</button>
+            </div>
+        </div>
+    </div>
+</form>
+<app-dialog *ngIf="showAlertMessage" [showDialogSpinner]="dialogMessageLoader" [showOk]="showOk" [showCancel]="false" [modalMessage]="dialogMessage"
+    (okDialogEvent)="okDialogAction()"></app-dialog>

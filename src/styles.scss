@@ -1,0 +1,9 @@
+/* You can add global styles to this file, and also import other style files */
+$brand-font-folder: '~@momentum-ui/core/fonts';
+$icon-font-path: '~@momentum-ui/icons/fonts';
+$images-path: '~@momentum-ui/core/images';
+//$cui-resource-path: "../node_modules/cisco-ui/dist";
+@import "@momentum-ui/core/scss/momentum-ui.scss";
+@import '@momentum-ui/icons/scss/momentum-ui-icons.scss';
+@import "~@ng-select/ng-select/themes/default.theme.css";
+//@import "~cisco-ui/src/scss/cui-standard.scss";

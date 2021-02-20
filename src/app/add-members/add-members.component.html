@@ -1,0 +1,114 @@
+<!--<div>
+    <h1>Add members</h1>
+</div>
+<hr>-->
+<form #addMembers="ngForm" class="">
+
+    <div class="momentum md">
+        <div id="create-room-header" class="md-panel__title">
+            <h4>Add Members</h4>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <label id="connector-lbl" for="company"><span>Select the room(s)</span> </label>
+                </div>
+                <div class="col-sm-4">
+                    <div>
+                        <ng-select [items]="rooms" [maxSelectedItems]="maxSelectedRooms" searchable="true"
+                            bindLabel="title" placeholder="Select a room" appendTo="body" multiple="true"
+                            [(ngModel)]="selectedRooms" #room="ngModel" name="room" (change)="onChange($event)"
+                            required>
+                        </ng-select>
+                    </div>
+
+                </div>
+                <div id="room-selection-error" class="col-sm-4 md-alert-banner md-alert-banner--info"
+                    *ngIf="selectedRooms.length===maxSelectedRooms">
+                    <div class="md-alert-banner__text">Maximum of 5 rooms are only allowed</div>
+                </div>
+
+            </div>
+        </div>
+        <div class="container">
+            <div *ngIf="selectedRooms?.length > 0">
+                <div id="room-information-header" class="md-panel__title">
+                    <h4>Room Information</h4>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <label class="md-label" id="room-id-lbl" for="roomId"><span>Room ID </span> </label>
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="text" id="roomId" class="md-input custom-input" name="roomId"
+                            [(ngModel)]="roomInfo.id" readonly #roomId="ngModel">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <label class="md-label" id="room-title" for="roomTitle"><span>Room Title </span> </label>
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="text" id="roomTitle" class="md-input custom-input" name="roomTitle"
+                            [(ngModel)]="roomInfo.title" readonly #roomTitle="ngModel">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <label class="md-label" id="created-lbl" for="created"><span>Created Time </span> </label>
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="text" id="created" class="md-input custom-input" name="created"
+                            [(ngModel)]="roomInfo.created" readonly #created="ngModel">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <label class="md-label" id="last-activity-lbl" for="hostName"><span>Last Activity </span>
+                        </label>
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="text" id="lastActivity" class="md-input custom-input" name="lastActivity"
+                            [(ngModel)]="roomInfo.lastActivity" readonly #lastActivity="ngModel">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <label id="connector-lbl" for="company"><span>Add members by email ID</span> </label>
+                </div>
+                <div class="col-sm-8">
+                    <input type="text" id="emailId" class="md-input input" name="emailId1" required
+                        [(ngModel)]="emailId" #emailId1="ngModel" placeholder="Enter the email ID"
+                        pattern="^[A-Za-z0-9._%-]+@[A-Za-z0-9._%-]+\.[a-z]{2,3}$">
+                    <span class="reqd">*</span>&nbsp;
+                    <div *ngFor="let email of emails; let i = index;">
+                        <input type="text" id="emailId" class="md-input input" name="email_{{i}}" required
+                            [(ngModel)]="email.email" placeholder="Enter the email ID"
+                            pattern="^[A-Za-z0-9._%-]+@[A-Za-z0-9._%-]+\.[a-z]{2,3}$">
+                        <span class="reqd">*</span>&nbsp;
+                        <button class="md-button md-button--28 md-button--red" (click)="removeEmail(i)">Remove</button>
+                        <!--<i class="md-icon icon icon-check-circle_36" style="color:green"></i>-->
+                        <i class="md-icon icon  icon-error_40" style="color:red"></i>
+                    </div>
+                    <br>
+                    <button class="md-button md-button--blue" (click)="addMore()">+ Add More</button>
+                    <button *ngIf="emails.length>1" class="md-button md-button--red" (click)="removeAll()">Remove
+                        All</button>
+                </div>
+                <div id="email-name-error" class="col-sm-4"
+                    *ngIf="addMembers.controls.room.valid && (addMembers.controls.emailId1.dirty || addMembers.controls.emailId1.touched) && addMembers.invalid">
+                    <div class="md-alert-banner md-alert-banner--error">* Please enter valid email ID</div>
+
+                </div>
+
+            </div>
+            <div class="row">
+                <button class="md-button md-button--36 md-button--blue" (click)="addMembersToSelectedRooms()"
+                    [disabled]="addMembers.invalid">Add Members</button>
+            </div>
+        </div>
+    </div>
+</form>
+<!--<app-dialog *ngIf="showAlertMessage" [showDialogSpinner]="dialogMessageLoader" [showOk]="showOk" [showCancel]="false" [modalMessage]="dialogMessage"
+    (okDialogEvent)="okDialogAction()"></app-dialog>-->

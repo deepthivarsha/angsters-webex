@@ -1,0 +1,84 @@
+<md-modal sizeType="large">
+    <md-modal-header headerLabel="Modify Rooms">
+    </md-modal-header>
+    <md-modal-body class="md-modal__body md-modal__body--padding">
+        <!--<div><a>create room</a><hr style="width:40%"><a>add members</a><hr style="width:40%"><a>send message</a></div>-->
+        <div style="margin-top:40px;"class="container">
+                <div class="row">
+                  <div class="col-sm-2">
+                        <a *ngIf="!createSelected" (click)=selectCreate()>1.Create Room</a>
+                        <a style="color:black;" *ngIf="createSelected">1.Create Room</a>
+                  </div>
+                  <div class="col-sm-3">
+                        <hr style="width:90%">
+                        </div>
+                        <div class="col-sm-2">
+                                <a *ngIf="!addSelected" (click)=selectAdd()>2.Add Members</a>
+                                <a style="color:black;" *ngIf="addSelected">2.Add Members</a>        
+                                </div>
+                                <div class="col-sm-3">
+                                        <hr style="width:90%">
+                                        </div>
+                                        <div class="col-sm-2">
+                                                <a *ngIf="!sendSelected" (click)=selectSend()>3.Send Message</a>
+                                                <a style="color:black;" *ngIf="sendSelected">3.Send Message</a>                        
+                                                </div>
+                                                </div>
+                                                </div>
+        <!--<div class="cui">
+            <cui-steps class="step" [steps]="steps" color="default" [vertical]="false" size="default">
+                </cui-steps>-->
+               <!-- <md-stepper [steps]="steps" [stepNumber]="stepNumber" [vertical]="false" (stepChange)="onStepChange($event)"></md-stepper>
+
+                </div>-->
+                <!--<mdb-stepper #stepper [linear]="false">
+                        <mdb-step name="Step 1" [stepForm]="firstFormGroup" class="step1">
+                          <form [formGroup]="firstFormGroup">
+                            <div class="md-form">
+                              <input type="text" class="form-control" mdbInput mdbValidate formControlName="email">
+                              <label for="">Email</label>
+                              <mdb-error *ngIf="email.invalid && (email.dirty || email.touched)">Input invalid</mdb-error>
+                              <mdb-success *ngIf="email.valid && (email.dirty || email.touched)">Input valid</mdb-success>
+                            </div>
+                          </form>
+                          <button mdbBtn size="sm" color="primary" (click)="stepper.next()">CONTINUE</button>
+                        </mdb-step>
+                        <mdb-step name="Step 2" [stepForm]="secondFormGroup" class="step2">
+                          <form [formGroup]="secondFormGroup">
+                            <div class="md-form">
+                              <input type="password" class="form-control" mdbInput mdbValidate formControlName="password">
+                              <label for="">Password</label>
+                              <mdb-error *ngIf="password.invalid && (password.dirty || password.touched)">Input invalid</mdb-error>
+                              <mdb-success *ngIf="password.valid && (password.dirty || password.touched)">Input valid</mdb-success>
+                            </div>
+                          </form>
+                          <button mdbBtn size="sm" color="primary" (click)="stepper.next()">CONTINUE</button>
+                          <button mdbBtn size="sm" color="secondary" (click)="stepper.previous()">BACK</button>
+                        </mdb-step>
+                        <mdb-step name="Step 3" label="Step 3 label" class="step3">
+                          <p class="pl-2">Finish!</p>
+                          <div class="step-actions">
+                            <button mdbBtn  size="sm" color="primary" (click)="onSubmit()">SUBMIT</button>
+                          </div>
+                        </mdb-step>
+                      </mdb-stepper>-->
+                     <app-create-room *ngIf="createSelected" style="margin-top:30px;margin-left:30px;"></app-create-room>
+                      <app-add-members *ngIf="addSelected" style="margin-top:30px;margin-left:30px;"></app-add-members>
+                     <app-send-message *ngIf="sendSelected" style="margin-top:30px;margin-left:30px;"></app-send-message>
+    </md-modal-body>
+    <md-modal-footer>
+      <button
+        type="button"
+        class="md-button md-button--red pull-right"
+      >
+        <span >cancel</span>
+      </button>
+      <button
+        type="button"
+        class="md-button pull-right"
+        id="ecp-remove-cluster-close"
+        
+      >next</button>
+    </md-modal-footer>
+  </md-modal>
+  
