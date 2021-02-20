@@ -1,0 +1,81 @@
+<div class=" medium-7 columns "style="align-items:center;margin: auto;padding: 15px;line-height: 30px;position: absolute;
+z-index: 15;
+top: 50%;
+left: 50%;
+margin: -100px 0 0 -150px;" class="new-message-component">
+          <div>
+             <h4>View Message History</h4>
+             <h6>To list messages from webex rooms</h6>
+          </div>
+          <div>
+             Room Id: <input md-input type="text" [(ngModel)]="room_id_for_list_msgs" id="roomIdForListMsgs" />
+          </div>
+          <button md-button (click)="onListMessage()" color="blue">List messages</button>
+          <div>
+             View Message history and respond :
+             <div class="md-data-table" style="width: 60%;">
+               <div class="md-data-table__wrapper">
+                 <table class="testTableClass">
+                   <thead class="md-data-table__thead">
+                     <tr>
+                       <th style="width: 8rem">Message</th>
+                     </tr>
+                   </thead>
+                   <tbody
+        class="md-data-table__tbody">
+            <li *ngFor="let item of listMessages">
+                <tr>
+                  <td >{{item.text}}</td></tr>
+                  <td>Sent By {{item.personEmail}} at {{item.created}}</td>
+               <br>
+            </li>
+               </tbody>
+            </table>
+          </div>
+        </div>
+          </div>
+ </div>
+ <div class="row">
+  <md-card class="card-height">
+     <md-card-section>
+        <div>
+           <h4>Incoming messages from Test RoomId</h4>
+           <h6>To list incoming messages and respond from webex rooms</h6>
+        </div>
+     </md-card-section>
+     <md-card-section>
+      <div  *ngFor="let notif of messageList;">
+         <div class="md-alert-banner md-alert-banner--info" *ngIf="notif.type === 'direct'">
+         <div class="md-alert-banner__text">Recieved a message from : {{notif.mail}}<br> {{notif.listen_msg}}</div>
+            <div class="md-alert-banner__close" tabindex="0" role="button" aria-label="Close">
+               <i class="icon icon-cancel_16"></i>
+            </div>
+         </div>
+      <div class="md-alert-banner md-alert-banner--info" *ngIf="notif.type === 'group'">
+         <div class="md-alert-banner__text">Recieved a message from : {{notif.mail}}<br>in the room {{notif.title}}<br> {{notif.listen_msg}}</div>
+         <div class="md-alert-banner__close" tabindex="0" role="button" aria-label="Close">
+           <i class="icon icon-cancel_16"></i>
+         </div>
+      </div>
+       </div>
+
+     </md-card-section>
+     <md-card-section>
+        <div class="md-input-container md-toggle-switch ">
+         <input
+         (click)="isFirstClick?onListen():onStopListen()"
+           class="md-input md-toggle-switch__input"
+           type="checkbox"
+           aria-checked="false"
+           name=""
+           id="testToggleSwitch1"
+           value=""
+         />
+         <label class="md-toggle-switch__label" for="testToggleSwitch1">
+           <span class="md-toggle-switch__label__container"></span>
+           <span class="md-toggle-switch__label__text">Notifications</span>
+         </label>
+       </div>
+     </md-card-section>
+  </md-card>
+</div>

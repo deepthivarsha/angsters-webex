@@ -92,6 +92,20 @@ export class WebexService {
     });
   }
 
+  listMessages(roomid) {
+    this.onInit();
+    if (roomid == null) {
+      roomid = localStorage.getItem('test_room_id');
+    }
+    return this.webex.messages.list({ roomId: roomid });
+  }
+
+  stopListeningToMessages() {
+    this.onInit();
+    this.webex.messages.stopListening();
+    alert("Stopped listening to message");
+  }
+
   async onListRoom() {
     return this.webex.rooms.list()
   }
