@@ -1,40 +1,4 @@
-<div class=" medium-7 columns "style="align-items:center;margin: auto;padding: 15px;line-height: 30px;position: absolute;
-z-index: 15;
-top: 50%;
-left: 50%;
-margin: -100px 0 0 -150px;" class="new-message-component">
-          <div>
-             <h4>View Message History</h4>
-             <h6>To list messages from webex rooms</h6>
-          </div>
-          <div>
-             Room Id: <input md-input type="text" [(ngModel)]="room_id_for_list_msgs" id="roomIdForListMsgs" />
-          </div>
-          <button md-button (click)="onListMessage()" color="blue">List messages</button>
-          <div>
-             View Message history and respond :
-             <div class="md-data-table" style="width: 60%;">
-               <div class="md-data-table__wrapper">
-                 <table class="testTableClass">
-                   <thead class="md-data-table__thead">
-                     <tr>
-                       <th style="width: 8rem">Message</th>
-                     </tr>
-                   </thead>
-                   <tbody
-        class="md-data-table__tbody">
-            <li *ngFor="let item of listMessages">
-                <tr>
-                  <td >{{item.text}}</td></tr>
-                  <td>Sent By {{item.personEmail}} at {{item.created}}</td>
-               <br>
-            </li>
-               </tbody>
-            </table>
-          </div>
-        </div>
-          </div>
- </div>
+
  <div class="row">
   <md-card class="card-height">
      <md-card-section>
@@ -78,4 +42,77 @@ margin: -100px 0 0 -150px;" class="new-message-component">
        </div>
      </md-card-section>
   </md-card>
+  
+</div>
+<div class="container">
+   <div class="row">
+           <div class="col-sm-5">
+      <md-card style="height:800px">
+         <md-card-section style="overflow-y: auto;">
+            <div class=" medium-7 columns " class="new-message-component">
+          <div>
+             <h4>View Message History</h4>
+             <h6>To list messages from webex rooms</h6>
+          </div>
+          <div>
+             Room Id: <input md-input type="text" [(ngModel)]="room_id_for_list_msgs" id="roomIdForListMsgs" />
+          </div>
+          <button md-button (click)="onListMessage()" color="blue">List messages</button>
+          <div>
+             View Message history and respond :
+             <div class="md-data-table" style="width: 60%;">
+               <div class="md-data-table__wrapper">
+                 <table class="testTableClass">
+                   <thead class="md-data-table__thead">
+                     <tr>
+                       <th style="width: 8rem">Message</th>
+                     </tr>
+                   </thead>
+                   <tbody
+        class="md-data-table__tbody">
+            <md-list *ngFor="let item of listMessages" style="padding:100px;">
+               <div class="msg-body" [ngStyle]="{ 'direction' : (item.personEmail.toLowerCase() === me.emails[0].toLowerCase()) ? 'rtl' : ''}" >
+               <div style="font-size: 0.65rem; color: darkgrey;padding:5px;" >{{(item.personEmail.toLowerCase() === me.emails[0].toLowerCase()) ? 'You' : item.personEmail}} sent at {{item.created | date: 'short'}}</div>
+               <span class="md-badge md-badge--pastel" style="word-wrap:break-word;">
+                  <div md-list-item style="font-size: 1.15rem;" [ngStyle]="{'color': (item.personEmail.toLowerCase() === me.emails[0].toLowerCase()) ? 'blue' : ''}">{{item.text}}<br></div>
+               </span>
+               </div>
+            </md-list>
+               </tbody>
+            </table>
+          </div>
+        </div>
+          </div>
+ </div>
+         </md-card-section>
+        <md-card-section >
+         <input mdinput="" class="md-width" placeholder="Enter the message" class="md-input" [(ngModel)]="message">
+         <button md-button (click)="sendMessageToSelectedRooms()" color="blue">List messages</button>
+        </md-card-section>
+      </md-card>
+</div>
+</div>
+</div>
+<div class="container">
+   <div class="row">
+           <div class="col-sm-4">
+      <md-card style="height:100px">
+         <md-card-section>
+               <div
+               title="{{me.displayName}}">
+               <span >{{me.displayName.toUpperCase()}}</span>
+               <img [alt]="me.displayName[0].toUpperCase()"style="width: 25%;
+               height: auto;
+               float: right;
+               margin-right:2rem; 
+               shape-outside:circle();" class="md-avatar__img" [src]="me.avatar">
+               <div class="md-alert__status">{{me.status}}</div>
+               <div class="md-alert__message" [title]="me.displayName">{{me.emails[0]}}</div>
+             </div>
+         </md-card-section>
+        <md-card-section style="overflow-y:auto;">
+        </md-card-section>
+      </md-card>
+</div>
+</div>
 </div>
