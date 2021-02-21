@@ -1,4 +1,29 @@
-<p>landing-page works!</p>
+<header class="md-top-bar md-top-bar--blue" role="navigation" >
+    <div class="md-top-bar__container">
+      <div class="md-top-bar__brand">
+        <a class="md-brand" href="/">
+          <div class="md-brand__logo md-brand__logo--pad">
+            <!-- Note: use either image or icon, but not both -->
+            <!-- img src="/assets/spark-logo.svg" alt="Momentum UI" -->
+            <i class="icon icon-cisco-logo"></i>
+          </div>
+          <div class="md-brand__title">Webex</div>
+        </a>
+      </div>
+      <nav class="md-top-bar__nav ">
+        <div class="md-list md-list--horizontal" role="list">
+          <a class="md-list-item active" role="listItem" href="/message">Message</a>
+          <a class="md-list-item" role="listItem" href="/meeting">Meeting</a>
+        </div>
+      </nav>
+      <div class="md-top-bar__right ">
+        <!-- Note: conditionally show top-bar__user or top-bar__logged-out -->
+         <div class="md-top-bar__user">
+            <button type="button" md-button color="red" (click)="onLogout()">Logout</button>
+         </div>
+      </div>
+    </div>
+  </header>
 <!--<app-stepper-angsters></app-stepper-angsters>-->
 <div>
         <div class="container">

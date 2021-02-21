@@ -20,6 +20,7 @@ export class LandingPageComponent implements OnInit {
   roomid;
   rooms:any;
   selectedRoomIndex = -1
+
   constructor(private modal: ModalService,private webex: WebexService) { }
 
   ngOnInit(): void {
@@ -123,6 +124,9 @@ export class LandingPageComponent implements OnInit {
           });
       }
     });
+  }
+  onLogout() {
+    this.webex.onLogout()
   }
 
   onhangup(){

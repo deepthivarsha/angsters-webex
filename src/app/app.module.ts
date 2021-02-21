@@ -16,7 +16,7 @@ import { SendMessageComponent } from './send-message/send-message.component';
 import { StepperAngstersComponent } from './stepper-angsters/stepper-angsters.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { CallingComponent } from './calling/calling.component';
-
+import { ListMessageComponent } from './list-message/list-message.component'
 
 @NgModule({
   declarations: [
@@ -29,7 +29,8 @@ import { CallingComponent } from './calling/calling.component';
     SendMessageComponent,
     StepperAngstersComponent,
     LandingPageComponent,
-    CallingComponent
+    CallingComponent,
+    ListMessageComponent
   ],
   imports: [
     AppRoutingModule,

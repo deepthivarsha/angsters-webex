@@ -56,7 +56,7 @@ export class SendMessageComponent implements OnInit {
     let promises: any[] = [];
     roomIds.forEach((room) => {
       const promise =
-        this.webex.onSendMessage(this.message, room.roomId, room.roomTitle)
+        this.webex.onSendMessage(this.message, room.roomId)
       promises.push(promise);
     })
 

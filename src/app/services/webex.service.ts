@@ -56,16 +56,16 @@ export class WebexService {
 });
   }
 
-  async onSendMessage(text: string, roomId:string, roomTitle:string): Promise<any>{
+  async onSendMessage(text: string, roomId:string): Promise<any>{
     return new Promise(async (resolve, reject) => {
       try {
     await this.webex.messages.create({
         text: text,
         roomId: roomId
       });
-      resolve("message sent to the room "+roomTitle);
+      resolve("message sent to the room ");
     } catch(error) {
-      reject(new Error("Unable to send message to the room "+roomTitle));
+      reject(new Error("Unable to send message to the room "));
     }
   })
 }
@@ -91,6 +91,16 @@ export class WebexService {
     reject(error)
     }
     });
+  }
+
+  listMessages(roomId: string) {
+    return this.webex.messages.list({roomId: roomId})
+  }
+
+  stopListeningToMessages() {
+    this.onInit();
+    this.webex.messages.stopListening();
+    alert("Stopped listening to message");
   }
 
   async onListRoom() {
