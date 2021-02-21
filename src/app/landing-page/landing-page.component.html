@@ -1,2 +1,532 @@
 <p>landing-page works!</p>
 <!--<app-stepper-angsters></app-stepper-angsters>-->
+<div>
+        <div class="container">
+                <div class="row">
+                        <div class="col-sm-4">
+                   <md-card style="height:300px">
+                      <md-card-section>
+                         
+                                <div class="md-input-container md-search-input md-margin__top md-padding__left" style="display: flex;">
+                                        <div class="md-input__wrapper medium-10 column">
+                                          <span class="md-input__before">
+                                            <i class="md-icon icon icon-search_20 md-search-input__icon" style="font-size: 20px;" [ngStyle]="{'color': 'red'}"></i>
+                                          </span>
+                                          <input #pillSearchInput class="md-input md-input--pill md-input--before md-active" tabindex="0" type="text"
+                                            id="pillSearchInput" [(ngModel)]="userSearchText" name="pillSearchInput" (input)="filterItem(pillSearchInput.value)" value="" />
+                                        </div>
+                                      </div>
+                      </md-card-section>
+                      <md-card-section style="overflow-y: auto">
+                            <div class="md-list md-list--vertical md-sidebar-nav__group md-sidebar-nav__group--primary space-list" *ngFor="let room of filteredItems; let i = index"
+                            (click)="activateRoom(i)"
+                            >
+                            <div class="md-list-item md-list-item--space space-list-item" id="md-list-item-11" role="listitem"
+                              tabindex="-1" aria-describedby="pressEnterToChat" aria-roledescription="list item" aria-current="false">
+                              <div class="md-list-item__left"><span>
+                                  <div class="md-avatar md-avatar--group md-avatar--40 md-avatar--dark space-list-avatar"
+                                    title="hello">
+                                    <span class="md-avatar__letter" [ngStyle]="{'color': 'red'}">{{room.title[0].toUpperCase()}}</span>
+                                  </div>
+                                </span></div>
+                              <div class="md-list-item__center room-item">
+                                <div class="md-list-item__header room-header">{{room.title}}</div>
+                                <div class="md-list-item__subheader"></div>
+                              </div>
+                              <div class="md-list-item__right"></div>
+                            </div>
+                           <!-- <div class="md-list-item md-list-item--space space-list-item" id="md-list-item-11" role="listitem"
+                              tabindex="-1" aria-describedby="pressEnterToChat" aria-roledescription="list item" aria-current="false">
+                              <div class="md-list-item__left"><span>
+                                  <div class="md-avatar md-avatar--group md-avatar--40 md-avatar--dark space-list-avatar"
+                                    title="hello">
+                                    <span class="md-avatar__letter" [ngStyle]="{'color': 'red'}">T</span>
+                                  </div>
+                                </span></div>
+                              <div class="md-list-item__center room-item">
+                                <div class="md-list-item__header room-header">test</div>
+                                <div class="md-list-item__subheader"></div>
+                              </div>
+                              <div class="md-list-item__right"></div>
+                            </div>
+                            <div class="md-list-item md-list-item--space space-list-item" id="md-list-item-11" role="listitem"
+                            tabindex="-1" aria-describedby="pressEnterToChat" aria-roledescription="list item" aria-current="false">
+                            <div class="md-list-item__left"><span>
+                                <div class="md-avatar md-avatar--group md-avatar--40 md-avatar--dark space-list-avatar"
+                                  title="hello">
+                                  <span class="md-avatar__letter" [ngStyle]="{'color': 'red'}">T</span>
+                                </div>
+                              </span></div>
+                            <div class="md-list-item__center room-item">
+                              <div class="md-list-item__header room-header">test</div>
+                              <div class="md-list-item__subheader"></div>
+                            </div>
+                            <div class="md-list-item__right"></div>
+                          </div>
+                          <div class="md-list-item md-list-item--space space-list-item" id="md-list-item-11" role="listitem"
+                          tabindex="-1" aria-describedby="pressEnterToChat" aria-roledescription="list item" aria-current="false">
+                          <div class="md-list-item__left"><span>
+                              <div class="md-avatar md-avatar--group md-avatar--40 md-avatar--dark space-list-avatar"
+                                title="hello">
+                                <span class="md-avatar__letter" [ngStyle]="{'color': 'red'}">T</span>
+                              </div>
+                            </span></div>
+                          <div class="md-list-item__center room-item">
+                            <div class="md-list-item__header room-header">test</div>
+                            <div class="md-list-item__subheader"></div>
+                          </div>
+                          <div class="md-list-item__right"></div>
+                        </div>
+                        <div class="md-list-item md-list-item--space space-list-item" id="md-list-item-11" role="listitem"
+                        tabindex="-1" aria-describedby="pressEnterToChat" aria-roledescription="list item" aria-current="false">
+                        <div class="md-list-item__left"><span>
+                            <div class="md-avatar md-avatar--group md-avatar--40 md-avatar--dark space-list-avatar"
+                              title="hello">
+                              <span class="md-avatar__letter" [ngStyle]="{'color': 'red'}">T</span>
+                            </div>
+                          </span></div>
+                        <div class="md-list-item__center room-item">
+                          <div class="md-list-item__header room-header">test</div>
+                          <div class="md-list-item__subheader"></div>
+                        </div>
+                        <div class="md-list-item__right"></div>
+                      </div>-->
+                          </div>
+                        </md-card-section>
+                      <md-card-section>
+                         <button md-button color="blue" (click)="onDial()">Create room</button>
+                         <button md-button color="blue" (click)="onhangup()">Create room</button>
+                      </md-card-section>
+                   </md-card>
+                   </div>
+                   <div class="col-sm-4">
+                   <md-card style="height:300px">
+                        <md-card-section>
+                           
+                                  <div class="md-input-container md-search-input md-margin__top md-padding__left" style="display: flex;">
+                                          <div class="md-input__wrapper medium-10 column">
+                                            <span class="md-input__before">
+                                              <i class="md-icon icon icon-search_20 md-search-input__icon" style="font-size: 20px;" [ngStyle]="{'color': 'red'}"></i>
+                                            </span>
+                                            <input #pillSearchInput class="md-input md-input--pill md-input--before md-active" tabindex="0" type="text"
+                                              id="pillSearchInput" [(ngModel)]="userSearchText" name="pillSearchInput" (input)="filterItem(pillSearchInput.value)" value="" />
+                                          </div>
+                                         <!-- <div class="connect-people">
+                                            <button
+                                              (click)="createRoom()"
+                                              id="createRoom"
+                                              [ngStyle]="{'color': darkColorFromTheme}"
+                                              class="md-button md-button--circle md-button--32 md-button--white global-activity-menu-button md-margin__left--s"
+                                              alt="Connect people" type="button" aria-label="Connect people" tabindex="0" aria-haspopup="true"
+                                              title="Create a Room">
+                                              <span class="md-button__children" style="opacity: 1;">
+                                                <i class="md-icon icon icon-plus_12" style="font-size: 12px;"></i>
+                                              </span>
+                                            </button>
+                                          </div>-->
+                                        </div>
+                        </md-card-section>
+                        <md-card-section style="overflow-y: auto">
+                              <div class="md-list md-list--vertical md-sidebar-nav__group md-sidebar-nav__group--primary space-list"
+                              >
+                              <div class="md-list-item md-list-item--space space-list-item" id="md-list-item-11" role="listitem"
+                                tabindex="-1" aria-describedby="pressEnterToChat" aria-roledescription="list item" aria-current="false">
+                                <div class="md-list-item__left"><span>
+                                    <div class="md-avatar md-avatar--group md-avatar--40 md-avatar--dark space-list-avatar"
+                                      title="hello">
+                                      <span class="md-avatar__letter" [ngStyle]="{'color': 'red'}">T</span>
+                                    </div>
+                                  </span></div>
+                                <div class="md-list-item__center room-item">
+                                  <div class="md-list-item__header room-header">hello 123</div>
+                                  <div class="md-list-item__subheader"></div>
+                                </div>
+                                <div class="md-list-item__right"></div>
+                              </div>
+                              <div class="md-list-item md-list-item--space space-list-item" id="md-list-item-11" role="listitem"
+                                tabindex="-1" aria-describedby="pressEnterToChat" aria-roledescription="list item" aria-current="false">
+                                <div class="md-list-item__left"><span>
+                                    <div class="md-avatar md-avatar--group md-avatar--40 md-avatar--dark space-list-avatar"
+                                      title="hello">
+                                      <span class="md-avatar__letter" [ngStyle]="{'color': 'red'}">T</span>
+                                    </div>
+                                  </span></div>
+                                <div class="md-list-item__center room-item">
+                                  <div class="md-list-item__header room-header">test</div>
+                                  <div class="md-list-item__subheader"></div>
+                                </div>
+                                <div class="md-list-item__right"></div>
+                              </div>
+                              <div class="md-list-item md-list-item--space space-list-item" id="md-list-item-11" role="listitem"
+                              tabindex="-1" aria-describedby="pressEnterToChat" aria-roledescription="list item" aria-current="false">
+                              <div class="md-list-item__left"><span>
+                                  <div class="md-avatar md-avatar--group md-avatar--40 md-avatar--dark space-list-avatar"
+                                    title="hello">
+                                    <span class="md-avatar__letter" [ngStyle]="{'color': 'red'}">T</span>
+                                  </div>
+                                </span></div>
+                              <div class="md-list-item__center room-item">
+                                <div class="md-list-item__header room-header">test</div>
+                                <div class="md-list-item__subheader"></div>
+                              </div>
+                              <div class="md-list-item__right"></div>
+                            </div>
+                            <div class="md-list-item md-list-item--space space-list-item" id="md-list-item-11" role="listitem"
+                            tabindex="-1" aria-describedby="pressEnterToChat" aria-roledescription="list item" aria-current="false">
+                            <div class="md-list-item__left"><span>
+                                <div class="md-avatar md-avatar--group md-avatar--40 md-avatar--dark space-list-avatar"
+                                  title="hello">
+                                  <span class="md-avatar__letter" [ngStyle]="{'color': 'red'}">T</span>
+                                </div>
+                              </span></div>
+                            <div class="md-list-item__center room-item">
+                              <div class="md-list-item__header room-header">test</div>
+                              <div class="md-list-item__subheader"></div>
+                            </div>
+                            <div class="md-list-item__right"></div>
+                          </div>
+                          <div class="md-list-item md-list-item--space space-list-item" id="md-list-item-11" role="listitem"
+                          tabindex="-1" aria-describedby="pressEnterToChat" aria-roledescription="list item" aria-current="false">
+                          <div class="md-list-item__left"><span>
+                              <div class="md-avatar md-avatar--group md-avatar--40 md-avatar--dark space-list-avatar"
+                                title="hello">
+                                <span class="md-avatar__letter" [ngStyle]="{'color': 'red'}">T</span>
+                              </div>
+                            </span></div>
+                          <div class="md-list-item__center room-item">
+                            <div class="md-list-item__header room-header">test</div>
+                            <div class="md-list-item__subheader"></div>
+                          </div>
+                          <div class="md-list-item__right"></div>
+                        </div>
+                            </div>
+                        </md-card-section>
+                        <md-card-section>
+                           <button md-button color="blue" (click)="onDial()">Create room</button>
+                           <button md-button color="blue" (click)="onhangup()">Create room</button>
+                        </md-card-section>
+                        
+                     </md-card>
+                     </div>
+                </div>
+            </div>
+            <div class="container">
+                    <div class="row">
+                            <div class="col-sm-4">
+                       <md-card style="height:300px">
+                          <md-card-section>
+                             
+                                    <div class="md-input-container md-search-input md-margin__top md-padding__left" style="display: flex;">
+                                            <div class="md-input__wrapper medium-10 column">
+                                              <span class="md-input__before">
+                                                <i class="md-icon icon icon-search_20 md-search-input__icon" style="font-size: 20px;" [ngStyle]="{'color': 'red'}"></i>
+                                              </span>
+                                              <input #pillSearchInput class="md-input md-input--pill md-input--before md-active" tabindex="0" type="text"
+                                                id="pillSearchInput" [(ngModel)]="userSearchText" name="pillSearchInput" (input)="filterItem(pillSearchInput.value)" value="" />
+                                            </div>
+                                           <!-- <div class="connect-people">
+                                              <button
+                                                (click)="createRoom()"
+                                                id="createRoom"
+                                                [ngStyle]="{'color': darkColorFromTheme}"
+                                                class="md-button md-button--circle md-button--32 md-button--white global-activity-menu-button md-margin__left--s"
+                                                alt="Connect people" type="button" aria-label="Connect people" tabindex="0" aria-haspopup="true"
+                                                title="Create a Room">
+                                                <span class="md-button__children" style="opacity: 1;">
+                                                  <i class="md-icon icon icon-plus_12" style="font-size: 12px;"></i>
+                                                </span>
+                                              </button>
+                                            </div>-->
+                                          </div>
+                          </md-card-section>
+                          <md-card-section style="overflow-y: auto">
+                                <div class="md-list md-list--vertical md-sidebar-nav__group md-sidebar-nav__group--primary space-list"
+                                >
+                                <div class="md-list-item md-list-item--space space-list-item" id="md-list-item-11" role="listitem"
+                                  tabindex="-1" aria-describedby="pressEnterToChat" aria-roledescription="list item" aria-current="false">
+                                  <div class="md-list-item__left"><span>
+                                      <div class="md-avatar md-avatar--group md-avatar--40 md-avatar--dark space-list-avatar"
+                                        title="hello">
+                                        <span class="md-avatar__letter" [ngStyle]="{'color': 'red'}">T</span>
+                                      </div>
+                                    </span></div>
+                                  <div class="md-list-item__center room-item">
+                                    <div class="md-list-item__header room-header">hello 123</div>
+                                    <div class="md-list-item__subheader"></div>
+                                  </div>
+                                  <div class="md-list-item__right"></div>
+                                </div>
+                                <div class="md-list-item md-list-item--space space-list-item" id="md-list-item-11" role="listitem"
+                                  tabindex="-1" aria-describedby="pressEnterToChat" aria-roledescription="list item" aria-current="false">
+                                  <div class="md-list-item__left"><span>
+                                      <div class="md-avatar md-avatar--group md-avatar--40 md-avatar--dark space-list-avatar"
+                                        title="hello">
+                                        <span class="md-avatar__letter" [ngStyle]="{'color': 'red'}">T</span>
+                                      </div>
+                                    </span></div>
+                                  <div class="md-list-item__center room-item">
+                                    <div class="md-list-item__header room-header">test</div>
+                                    <div class="md-list-item__subheader"></div>
+                                  </div>
+                                  <div class="md-list-item__right"></div>
+                                </div>
+                                <div class="md-list-item md-list-item--space space-list-item" id="md-list-item-11" role="listitem"
+                                tabindex="-1" aria-describedby="pressEnterToChat" aria-roledescription="list item" aria-current="false">
+                                <div class="md-list-item__left"><span>
+                                    <div class="md-avatar md-avatar--group md-avatar--40 md-avatar--dark space-list-avatar"
+                                      title="hello">
+                                      <span class="md-avatar__letter" [ngStyle]="{'color': 'red'}">T</span>
+                                    </div>
+                                  </span></div>
+                                <div class="md-list-item__center room-item">
+                                  <div class="md-list-item__header room-header">test</div>
+                                  <div class="md-list-item__subheader"></div>
+                                </div>
+                                <div class="md-list-item__right"></div>
+                              </div>
+                              <div class="md-list-item md-list-item--space space-list-item" id="md-list-item-11" role="listitem"
+                              tabindex="-1" aria-describedby="pressEnterToChat" aria-roledescription="list item" aria-current="false">
+                              <div class="md-list-item__left"><span>
+                                  <div class="md-avatar md-avatar--group md-avatar--40 md-avatar--dark space-list-avatar"
+                                    title="hello">
+                                    <span class="md-avatar__letter" [ngStyle]="{'color': 'red'}">T</span>
+                                  </div>
+                                </span></div>
+                              <div class="md-list-item__center room-item">
+                                <div class="md-list-item__header room-header">test</div>
+                                <div class="md-list-item__subheader"></div>
+                              </div>
+                              <div class="md-list-item__right"></div>
+                            </div>
+                            <div class="md-list-item md-list-item--space space-list-item" id="md-list-item-11" role="listitem"
+                            tabindex="-1" aria-describedby="pressEnterToChat" aria-roledescription="list item" aria-current="false">
+                            <div class="md-list-item__left"><span>
+                                <div class="md-avatar md-avatar--group md-avatar--40 md-avatar--dark space-list-avatar"
+                                  title="hello">
+                                  <span class="md-avatar__letter" [ngStyle]="{'color': 'red'}">T</span>
+                                </div>
+                              </span></div>
+                            <div class="md-list-item__center room-item">
+                              <div class="md-list-item__header room-header">test</div>
+                              <div class="md-list-item__subheader"></div>
+                            </div>
+                            <div class="md-list-item__right"></div>
+                          </div>
+                              </div>
+                          </md-card-section>
+                          <md-card-section>
+                          </md-card-section>
+                       </md-card>
+                       </div>
+                       <div class="col-sm-4">
+                       <md-card style="height:300px">
+                            <md-card-section>
+                               
+                                      <div class="md-input-container md-search-input md-margin__top md-padding__left" style="display: flex;">
+                                              <div class="md-input__wrapper medium-10 column">
+                                                <span class="md-input__before">
+                                                  <i class="md-icon icon icon-search_20 md-search-input__icon" style="font-size: 20px;" [ngStyle]="{'color': 'red'}"></i>
+                                                </span>
+                                                <input #pillSearchInput class="md-input md-input--pill md-input--before md-active" tabindex="0" type="text"
+                                                  id="pillSearchInput" [(ngModel)]="userSearchText" name="pillSearchInput" (input)="filterItem(pillSearchInput.value)" value="" />
+                                              </div>
+                                             <!-- <div class="connect-people">
+                                                <button
+                                                  (click)="createRoom()"
+                                                  id="createRoom"
+                                                  [ngStyle]="{'color': darkColorFromTheme}"
+                                                  class="md-button md-button--circle md-button--32 md-button--white global-activity-menu-button md-margin__left--s"
+                                                  alt="Connect people" type="button" aria-label="Connect people" tabindex="0" aria-haspopup="true"
+                                                  title="Create a Room">
+                                                  <span class="md-button__children" style="opacity: 1;">
+                                                    <i class="md-icon icon icon-plus_12" style="font-size: 12px;"></i>
+                                                  </span>
+                                                </button>
+                                              </div>-->
+                                            </div>
+                            </md-card-section>
+                            <md-card-section style="overflow-y: auto">
+                                  <div class="md-list md-list--vertical md-sidebar-nav__group md-sidebar-nav__group--primary space-list"
+                                  >
+                                  <div class="md-list-item md-list-item--space space-list-item" id="md-list-item-11" role="listitem"
+                                    tabindex="-1" aria-describedby="pressEnterToChat" aria-roledescription="list item" aria-current="false">
+                                    <div class="md-list-item__left"><span>
+                                        <div class="md-avatar md-avatar--group md-avatar--40 md-avatar--dark space-list-avatar"
+                                          title="hello">
+                                          <span class="md-avatar__letter" [ngStyle]="{'color': 'red'}">T</span>
+                                        </div>
+                                      </span></div>
+                                    <div class="md-list-item__center room-item">
+                                      <div class="md-list-item__header room-header">hello 123</div>
+                                      <div class="md-list-item__subheader"></div>
+                                    </div>
+                                    <div class="md-list-item__right"></div>
+                                  </div>
+                                  <div class="md-list-item md-list-item--space space-list-item" id="md-list-item-11" role="listitem"
+                                    tabindex="-1" aria-describedby="pressEnterToChat" aria-roledescription="list item" aria-current="false">
+                                    <div class="md-list-item__left"><span>
+                                        <div class="md-avatar md-avatar--group md-avatar--40 md-avatar--dark space-list-avatar"
+                                          title="hello">
+                                          <span class="md-avatar__letter" [ngStyle]="{'color': 'red'}">T</span>
+                                        </div>
+                                      </span></div>
+                                    <div class="md-list-item__center room-item">
+                                      <div class="md-list-item__header room-header">test</div>
+                                      <div class="md-list-item__subheader"></div>
+                                    </div>
+                                    <div class="md-list-item__right"></div>
+                                  </div>
+                                  <div class="md-list-item md-list-item--space space-list-item" id="md-list-item-11" role="listitem"
+                                  tabindex="-1" aria-describedby="pressEnterToChat" aria-roledescription="list item" aria-current="false">
+                                  <div class="md-list-item__left"><span>
+                                      <div class="md-avatar md-avatar--group md-avatar--40 md-avatar--dark space-list-avatar"
+                                        title="hello">
+                                        <span class="md-avatar__letter" [ngStyle]="{'color': 'red'}">T</span>
+                                      </div>
+                                    </span></div>
+                                  <div class="md-list-item__center room-item">
+                                    <div class="md-list-item__header room-header">test</div>
+                                    <div class="md-list-item__subheader"></div>
+                                  </div>
+                                  <div class="md-list-item__right"></div>
+                                </div>
+                                <div class="md-list-item md-list-item--space space-list-item" id="md-list-item-11" role="listitem"
+                                tabindex="-1" aria-describedby="pressEnterToChat" aria-roledescription="list item" aria-current="false">
+                                <div class="md-list-item__left"><span>
+                                    <div class="md-avatar md-avatar--group md-avatar--40 md-avatar--dark space-list-avatar"
+                                      title="hello">
+                                      <span class="md-avatar__letter" [ngStyle]="{'color': 'red'}">T</span>
+                                    </div>
+                                  </span></div>
+                                <div class="md-list-item__center room-item">
+                                  <div class="md-list-item__header room-header">test</div>
+                                  <div class="md-list-item__subheader"></div>
+                                </div>
+                                <div class="md-list-item__right"></div>
+                              </div>
+                              <div class="md-list-item md-list-item--space space-list-item" id="md-list-item-11" role="listitem"
+                              tabindex="-1" aria-describedby="pressEnterToChat" aria-roledescription="list item" aria-current="false">
+                              <div class="md-list-item__left"><span>
+                                  <div class="md-avatar md-avatar--group md-avatar--40 md-avatar--dark space-list-avatar"
+                                    title="hello">
+                                    <span class="md-avatar__letter" [ngStyle]="{'color': 'red'}">T</span>
+                                  </div>
+                                </span></div>
+                              <div class="md-list-item__center room-item">
+                                <div class="md-list-item__header room-header">test</div>
+                                <div class="md-list-item__subheader"></div>
+                              </div>
+                              <div class="md-list-item__right"></div>
+                            </div>
+                                </div>
+                            </md-card-section>
+                            <md-card-section>
+                              <!-- <button md-button color="blue" (click)="onDial()">Create room</button>
+                               <button md-button color="blue" (click)="onhangup()">Create room</button>-->
+                            </md-card-section>
+                            
+                         </md-card>
+                         </div>
+                    </div>
+                </div>
+    <div className="medium-4 columns">
+            <div class="md-input-container md-search-input md-margin__top md-padding__left" style="display: flex;">
+                    <div class="md-input__wrapper medium-10 column">
+                      <span class="md-input__before">
+                        <i class="md-icon icon icon-search_20 md-search-input__icon" style="font-size: 20px;" [ngStyle]="{'color': 'red'}"></i>
+                      </span>
+                      <input class="md-input md-input--pill md-input--before md-active" tabindex="0" type="text"
+                        id="pillSearchInput" [(ngModel)]="userSearchText" name="pillSearchInput" (input)="filterItem(pillSearchInput.value)" value="" />
+                    </div>
+                   <!-- <div class="connect-people">
+                      <button
+                        (click)="createRoom()"
+                        id="createRoom"
+                        [ngStyle]="{'color': darkColorFromTheme}"
+                        class="md-button md-button--circle md-button--32 md-button--white global-activity-menu-button md-margin__left--s"
+                        alt="Connect people" type="button" aria-label="Connect people" tabindex="0" aria-haspopup="true"
+                        title="Create a Room">
+                        <span class="md-button__children" style="opacity: 1;">
+                          <i class="md-icon icon icon-plus_12" style="font-size: 12px;"></i>
+                        </span>
+                      </button>
+                    </div>-->
+                  </div>
+<div class="md-list md-list--vertical md-sidebar-nav__group md-sidebar-nav__group--primary space-list"
+              >
+              <div class="md-list-item md-list-item--space space-list-item" id="md-list-item-11" role="listitem"
+                tabindex="-1" aria-describedby="pressEnterToChat" aria-roledescription="list item" aria-current="false">
+                <div class="md-list-item__left"><span>
+                    <div class="md-avatar md-avatar--group md-avatar--40 md-avatar--dark space-list-avatar"
+                      title="hello">
+                      <span class="md-avatar__letter" [ngStyle]="{'color': 'red'}">T</span>
+                    </div>
+                  </span></div>
+                <div class="md-list-item__center room-item">
+                  <div class="md-list-item__header room-header">hello 123</div>
+                  <div class="md-list-item__subheader"></div>
+                </div>
+                <div class="md-list-item__right"></div>
+              </div>
+              <div class="md-list-item md-list-item--space space-list-item" id="md-list-item-11" role="listitem"
+                tabindex="-1" aria-describedby="pressEnterToChat" aria-roledescription="list item" aria-current="false">
+                <div class="md-list-item__left"><span>
+                    <div class="md-avatar md-avatar--group md-avatar--40 md-avatar--dark space-list-avatar"
+                      title="hello">
+                      <span class="md-avatar__letter" [ngStyle]="{'color': 'red'}">T</span>
+                    </div>
+                  </span></div>
+                <div class="md-list-item__center room-item">
+                  <div class="md-list-item__header room-header">test</div>
+                  <div class="md-list-item__subheader"></div>
+                </div>
+                <div class="md-list-item__right"></div>
+              </div>
+            </div>
+            <div *ngIf="incoming_call" class="md-alert md-alert--call">
+                    <div class="md-modal__backdrop fade in">
+                      <div
+                        role="dialog"
+                        id="react-aria-modal-dialog"
+                        class="md-modal md-modal--dialog in"
+                        aria-labelledby="modalDialog"
+                        tabindex="-1"
+                      >
+                        <div class="md-modal__content">
+                          <div class="md-modal__flex-container">
+                            <div class="md-modal__header">
+                              <span class="md-modal__title">Incoming md-alert--call</span>
+                              <button class="md-close md-modal__close"></button>
+                            </div>
+                            <div class="md-modal__body"><span>There is an Incoming Call</span></div>
+                            <div class="md-modal__footer">
+                             <button class="md-button md-button--circle md-button--44 md-button--red" 
+                              alt="reject call" type="button" 
+                              (click)="incoming_cancel()" aria-label="reject call" tabindex="0">
+                                <span class="md-button__children">
+                                  <i class="icon icon-cancel_24"></i>
+                                </span>
+                              </button>
+                              <button
+                                class="md-button md-button--circle md-button--44 md-button--green"
+                                alt="answer call with voice and video"
+                                type="button"
+                                (click)="incoming_attend()"
+                                aria-label="answer call with voice and video" t
+                                abindex="0">
+                                <span class="md-button__children">
+                                  <i class="icon icon-camera_24"></i>
+                                </span>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+            <button md-button color="blue" (click)="onDial()">Meet room</button>
+                             <button md-button color="blue" (click)="onhangup()">hang up</button>
+            </div>
+
+            </div>

@@ -11,6 +11,7 @@ export class WebexService {
   webex: any
   currentRoom: any;
   roomId: any;
+  rooms:any;
 
   onBeforeLogin() {
     this.webex = WebexSDK.init({
@@ -111,6 +112,10 @@ export class WebexService {
         localStorage.setItem('webex_token', this.webex.credentials.supertoken.access_token)
       }
     });
+  }
+
+  async onListMessages(roomId: string) {
+    return this.webex.messages.list({roomId: roomId})
   }
 
   onLogout() {

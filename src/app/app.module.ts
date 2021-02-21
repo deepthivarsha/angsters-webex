@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { CreateRoomComponent } from './create-room/create-room.component';
 import { AuthComponent } from './auth/auth.component';
 import { CommonModule } from '@angular/common';
-import { ButtonModule, SelectModule, ModalModule, StepperModule, AlertModule } from '@momentum-ui/angular';
+import { ButtonModule, SelectModule, ModalModule, StepperModule, AlertModule, CardModule } from '@momentum-ui/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { NgSelectModule } from '@ng-select/ng-select';
@@ -15,6 +15,7 @@ import { AddMembersComponent } from './add-members/add-members.component';
 import { SendMessageComponent } from './send-message/send-message.component';
 import { StepperAngstersComponent } from './stepper-angsters/stepper-angsters.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { CallingComponent } from './calling/calling.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
     AddMembersComponent,
     SendMessageComponent,
     StepperAngstersComponent,
-    LandingPageComponent
+    LandingPageComponent,
+    CallingComponent
   ],
   imports: [
     AppRoutingModule,
@@ -42,7 +44,8 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
     BrowserAnimationsModule,
     ModalModule,
     StepperModule,
-    AlertModule
+    AlertModule,
+    CardModule
   ],
   providers: [],
   bootstrap: [AppComponent],
