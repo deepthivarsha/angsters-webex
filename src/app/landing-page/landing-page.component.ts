@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ModalService } from '@momentum-ui/angular';
 import { StepperAngstersComponent } from '../stepper-angsters/stepper-angsters.component';
 import { WebexService } from '../services/webex.service';
@@ -6,7 +6,7 @@ import { WebexService } from '../services/webex.service';
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.component.html',
-  styleUrls: ['./landing-page.component.scss']
+  styleUrls: ['./landing-page.component.sass']
 })
 export class LandingPageComponent implements OnInit {
   userSearchText;
@@ -20,11 +20,28 @@ export class LandingPageComponent implements OnInit {
   roomid;
   rooms:any;
   selectedRoomIndex = -1
+  me: any;
+  userName: string;
+  selectedRoom:any;
+  roomID:any;
+  room_id_for_list_msgs: any;
+  listMessages: any;
+  listen_msg;
+  //localStorage.setItem('notifOn',false);
+  isFirstClick:boolean;
+  messageList: any[] = [];
+  showAlertMessage: boolean;
+  dialogMessage: any;
+  message : string;
+  d:boolean;
+  callJoined: boolean;
 
   constructor(private modal: ModalService,private webex: WebexService) { }
 
   ngOnInit(): void {
+
     console.log("welcome");
+    
     /*const modalRef = this.modal.open({
       content: StepperAngstersComponent
     });
@@ -32,20 +49,40 @@ export class LandingPageComponent implements OnInit {
       /* do the stuff to process here */
       /* ex is the data */
     //});
-    if (this.webex.webex === undefined) {
+    //if (this.webex.webex === undefined) {
       this.webex.onInit();
-  }
+ // }
+  /*this.webex.getMyOwnDetails().then((data)=>{
+    console.log(data)
+    this.me = data;
+    this.userName = data.displayName;
+    console.log(this.userName)
+    })
   this.onRegister();
   this.listRooms();
-  this.listMessages();
+  this.listMessages();*/
   //this.assignCopy();
 
   //this.listenForIncoming();
+  this.startActionItems();
   }
 
+  startActionItems(){
+    this.webex.getMyOwnDetails().then((data)=>{
+      console.log(data)
+      this.me = data;
+      this.userName = data.displayName;
+      console.log(this.userName)
+      })
+    //this.onRegister();
+    this.listRooms();
+    this.onListen();
+
+  }
   async joinMeeting(meeting) {
     
     return meeting.join().then(() => {
+      this.callJoined = true;
       const mediaSettings = {
         receiveVideo: false,
         receiveAudio: true,
@@ -73,19 +110,67 @@ export class LandingPageComponent implements OnInit {
       console.log(JSON.stringify(rooms.items))
       this.rooms = rooms.items;
       this.filteredItems = this.rooms;
+      this.selectedRoom = this.rooms[0];
+      this.onListMessage();
     })
   }
-  listMessages() {
-    this.webex.onListMessages(this.roomid).then((msgs) => {
-    console.log(JSON.stringify(msgs.items))
-    //this.rooms = rooms.items;
-  })
+  onListMessage(){
+    let messages = this.webex.listMessages(this.room_id_for_list_msgs);
+    this.webex.listMessages(this.selectedRoom.id).then((msgs) => {
+      this.listMessages=msgs.items.slice().reverse();
+      console.log(this.listMessages);
+    });
+  }
+  onListen(){
+    
+    this.webex.webex.messages.listen()
+    .then(() => {
+      alert('listening to message events');
+      this.webex.webex.messages.on('created', (event) =>{
+         console.log(`Got a message:created event:\n${event}`)
+         console.log(event);
+         this.listen_msg=event.data.text;
+         console.log("hello"+this.room_id_for_list_msgs)
+         console.log("dhjsjd"+event.data)
+         if (this.roomID === event.data.roomId)
+         {
+           this.listMessages.push(event.data);
+           console.log(this.listMessages+"recieved")
+         }
+         else{
+           if(this.isFirstClick){
+            const room =  this.rooms.filter(item => item.id === event.data.roomId);
+            console.log(JSON.stringify(room));
+            
+            this.messageList.push({ listen_msg: event.data.text.slice(0,20),title: room[0].title });
+            this.messageList=this.messageList.slice().reverse();
+           }
+         }
+      }
+      );
+      //this.webex.messages.on('deleted', (event) => console.log(`Got a message:deleted event:\n${event}`));
+    })
+    .catch((e) => alert(`Unable to register for message events: ${e}`));
+ 
+  }
+
+ notificationOnOrOff(event){
+  this.isFirstClick =  !this.isFirstClick;
+ }
+
+ async sendMessageToSelectedRooms() {
+
+  // send message - fetch promises
+      this.webex.onSendMessage(this.message, this.selectedRoom.id)
+
+
+ 
 }
   
   onDial(){
     //localStorage.setItem('invite',this.invitee)
-
-    return this.webex.webex.meetings.create('Y2lzY29zcGFyazovL3VzL1JPT00vY2M4MmMxYzAtNzQyNy0xMWViLWJiOGEtMzdjNzQ5NjI1YTRk').then((meeting) => {
+    this.d = false;
+    return this.webex.webex.meetings.create(this.selectedRoom.id).then((meeting) => {
       this.meet=meeting;
       this.meetCreate =true;
       this.incomingMeet = false;
@@ -97,6 +182,7 @@ export class LandingPageComponent implements OnInit {
       console.error(error);
     });
   }
+
   async onRegister() {
     try {
       await this.webex.webex.meetings.register();
@@ -130,6 +216,7 @@ export class LandingPageComponent implements OnInit {
   }
 
   onhangup(){
+    this.callJoined = false;
     if(this.meetCreate){
     this.meet.leave()
     this.meetCreate = false;
@@ -178,7 +265,30 @@ async incoming_cancel(){
   }
  }
 
- activateRoom(index) {
+ activateRoom(index,room) {
   this.selectedRoomIndex=index
+  this.selectedRoom = room;
+  this.roomID = room.id;
+  this.onListMessage();
+  console.log("selected room:"+room.title);
+}
+showMessage(msg){
+  this.showAlertMessage = true;
+  this.dialogMessage = msg;
+
+}
+okDialogAction(){
+  this.showAlertMessage = false;
+}
+
+removeAll() {
+  this.messageList = [];
+}
+
+joining(){
+  this.d = true
+}
+cancel(){
+  this.d=false
 }
 }

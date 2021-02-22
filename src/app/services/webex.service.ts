@@ -30,7 +30,7 @@ export class WebexService {
     this.webex.authorization.initiateLogin()
   }
 
-  onInit() {
+   onInit() {
     this.webex = WebexSDK.init({
         config: {
           meetings: {
