@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter , AfterViewChecked, ElementRef, ViewChild} from '@angular/core';
 import { ModalService } from '@momentum-ui/angular';
 import { StepperAngstersComponent } from '../stepper-angsters/stepper-angsters.component';
 import { WebexService } from '../services/webex.service';
@@ -9,6 +9,7 @@ import { WebexService } from '../services/webex.service';
   styleUrls: ['./landing-page.component.sass']
 })
 export class LandingPageComponent implements OnInit {
+  @ViewChild('scrollMe') private myScrollContainer: ElementRef;
   userSearchText;
   meet: any;
   incoming_meeting: any;
@@ -65,6 +66,7 @@ export class LandingPageComponent implements OnInit {
 
   //this.listenForIncoming();
   this.startActionItems();
+  this.scrollToBottom();
   }
 
   startActionItems(){
@@ -120,7 +122,18 @@ export class LandingPageComponent implements OnInit {
       this.listMessages=msgs.items.slice().reverse();
       console.log(this.listMessages);
     });
+    this.scrollToBottom();
   }
+
+  ngAfterViewChecked() {        
+    this.scrollToBottom();        
+} 
+
+scrollToBottom(): void {
+    try {
+        this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+    } catch(err) { }                 
+}
   onListen(){
     
     this.webex.webex.messages.listen()
