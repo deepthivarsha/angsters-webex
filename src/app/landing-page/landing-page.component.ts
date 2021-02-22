@@ -35,6 +35,11 @@ export class LandingPageComponent implements OnInit {
   message : string;
   d:boolean;
   callJoined: boolean;
+  addClicked: boolean;
+  addMembersSelected: boolean;
+  createRoomSelected: boolean;
+  sendSelected: boolean;
+  sendMsgSelected: boolean;
 
   constructor(private modal: ModalService,private webex: WebexService) { }
 
@@ -74,10 +79,14 @@ export class LandingPageComponent implements OnInit {
       this.userName = data.displayName;
       console.log(this.userName)
       })
-    //this.onRegister();
+    this.onRegister();
     this.listRooms();
     this.onListen();
 
+  }
+
+  openStepperCreateModal(){
+    
   }
   async joinMeeting(meeting) {
     
@@ -105,12 +114,40 @@ export class LandingPageComponent implements OnInit {
     });
   }
 
+  createAddSend(){
+     const modalRef = this.modal.open({
+      content: StepperAngstersComponent,
+    });
+    modalRef.onHide$.subscribe( ex => {
+      this.listRooms();
+      /* do the stuff to process here */
+      /* ex is the data */
+    });
+    console.log("comes here");
+    this.addClicked=true;
+
+  }
+  /*createRoom(){
+    this.addClicked=true;
+    this.createRoomSelected = true;
+
+
+  }
+  sendMessage() {
+    this.addClicked=true;
+    this.sendMsgSelected = true;
+  }*/
+
+
+  
   listRooms() {
     this.webex.onListRoom().then((rooms) => {
       console.log(JSON.stringify(rooms.items))
       this.rooms = rooms.items;
       this.filteredItems = this.rooms;
+      if(this.selectedRoom === undefined) {
       this.selectedRoom = this.rooms[0];
+      }
       this.onListMessage();
     })
   }
@@ -125,7 +162,6 @@ export class LandingPageComponent implements OnInit {
     
     this.webex.webex.messages.listen()
     .then(() => {
-      alert('listening to message events');
       this.webex.webex.messages.on('created', (event) =>{
          console.log(`Got a message:created event:\n${event}`)
          console.log(event);
@@ -138,7 +174,7 @@ export class LandingPageComponent implements OnInit {
            console.log(this.listMessages+"recieved")
          }
          else{
-           if(this.isFirstClick){
+           if(this.isFirstClick && event.data.personEmail!=this.me.emails[0]){
             const room =  this.rooms.filter(item => item.id === event.data.roomId);
             console.log(JSON.stringify(room));
             
@@ -266,9 +302,11 @@ async incoming_cancel(){
  }
 
  activateRoom(index,room) {
+   console.log("comes to activate");
   this.selectedRoomIndex=index
   this.selectedRoom = room;
   this.roomID = room.id;
+  this.webex.currentRoom = room;
   this.onListMessage();
   console.log("selected room:"+room.title);
 }

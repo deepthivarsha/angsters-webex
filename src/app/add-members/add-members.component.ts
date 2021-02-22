@@ -116,7 +116,7 @@ export class AddMembersComponent implements OnInit {
       })
       if (invalidResults.length === totalOperationsCount) {
         this.dialogMessage = "Unable to add the member(s). Reasons for failure: <br>" + errors;
-        this.alertService.error('Error', "Unable to add the member(s). Reasons for failure: <br>" + errors, {
+        this.alertService.error('Error', "Unable to add the member(s).Please check the mail id(s)", {
           ariaLabel: 'Close Alert',
           orderNewest: false,
           onHide: () => console.info('onHide info'),
@@ -124,7 +124,7 @@ export class AddMembersComponent implements OnInit {
       }
       if (invalidResults.length < totalOperationsCount) {
         this.dialogMessage = "Few of the members were not able to be added to the requested room(s).<br> The following actions failed: <br>" + errors;
-        this.alertService.error('Error', "Few of the members were not able to be added to the requested room(s).<br> The following actions failed: <br>" + errors, {
+        this.alertService.error('Error', "Few of the members were not able to be added to the requested room(s).Please check the mail id(s)", {
           ariaLabel: 'Close Alert',
           orderNewest: false,
           onHide: () => console.info('onHide info'),

@@ -86,6 +86,32 @@
                       </div>
                    <div class="col-sm-4">
                    <md-card style="height:200px;width:600px;">
+                      <md-card-section>
+                          <div class="well" style="max-width: 600px; margin: 0 auto 10px;">
+                              <div class="docs-example docs-example--spacing">
+                                <button type="button" class="md-button md-button--expand" (click)="createAddSend()"><span style="margin-right:200px;">
+                                    <i class="icon md-icon--blue icon-add_24"></i>
+                                    </span><span style="margin-right:200px;">
+                                        <i class="icon md-icon--blue icon-participant-add_28"></i>
+                                        </span><span>
+                                            <i class="icon md-icon--blue icon-send_24"></i>
+                                            </span></button>
+                              </div>
+                            </div>
+                          </md-card-section>
+<md-card-section>
+                        <!--<div class="row">
+                          <div class="col-sm-2">
+                              <button class="md-button md-button--blue"
+                              alt="add participant" type="button"
+                              (click)="addMembers()" aria-label="reject call" tabindex="0">
+                              <span class="md-button__children">
+                              <i class="icon icon-participant-add_28"></i>
+                              </span>
+                              </button>
+                          </div>
+                        </div>-->
+                        </md-card-section>
                      </md-card>
                      </div>
                 </div>
@@ -189,7 +215,7 @@
                              
                               </textarea>
                           <!--<input mdinput="" class="md-width" placeholder="Enter the message" class="md-input" [(ngModel)]="message">-->
-                          <button style="margin-left:1300px;" md-button (click)="sendMessageToSelectedRooms()" color="blue">List messages</button>
+                          <button style="margin-left:1300px;" md-button (click)="sendMessageToSelectedRooms()" color="blue">Send</button>
                           </div>
                           <div *ngIf="callJoined" class="md-alert md-alert--call">
                               <div class="md-alert__title">On a call</div>
@@ -225,10 +251,10 @@
                         <div class="md-modal__content">
                           <div class="md-modal__flex-container">
                             <div class="md-modal__header">
-                              <span class="md-modal__title">Incoming md-alert--call</span>
+                              <span class="md-modal__title">Call</span>
                               <button class="md-close md-modal__close"></button>
                             </div>
-                            <div class="md-modal__body"><span>There is an Incoming Call</span></div>
+                            <div class="md-modal__body"><span>Incoming Call</span></div>
                             <div class="md-modal__footer">
                              <button class="md-button md-button--circle md-button--44 md-button--red" 
                               alt="reject call" type="button" 
@@ -292,6 +318,7 @@
       </div>
       </div>
         </div>
+     <!--  <app-stepper-angsters *ngIf="addClicked" [createSelected]="createRoomSelected" [addSelected]="addMembersSelected" [sendSelected]="sendMsgSelected"  ></app-stepper-angsters>-->
 
             
 

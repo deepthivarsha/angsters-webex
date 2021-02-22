@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ModalService, ModalRef } from '@momentum-ui/angular';
 
@@ -15,6 +15,8 @@ export class StepperAngstersComponent implements OnInit {
   secondFormGroup: FormGroup;
   showHeader = false;
   sampleData;
+  showClose:Boolean;
+  backdrop:Boolean = true;
   
   public steps = [{
     title: 'Momentum Checkbox',
@@ -40,9 +42,9 @@ export class StepperAngstersComponent implements OnInit {
    // fields: Object.values(this.testForm.controls)
   }
   ];
-
+ 
   public stepNumber = 0;
-  createSelected= true;
+  createSelected:boolean = true;
   addSelected:boolean;
   sendSelected:boolean;
 
@@ -86,6 +88,9 @@ export class StepperAngstersComponent implements OnInit {
     this.createSelected = false;
     this.addSelected = false;
     this.sendSelected = true;
+  }
+  cancel(){
+  this.modalRef.close();
   }
 
 }

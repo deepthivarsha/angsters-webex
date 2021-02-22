@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WebexService } from '../services/webex.service';
+import { AlertService } from '@momentum-ui/angular';
 
 @Component({
   selector: 'app-send-message',
@@ -20,7 +21,7 @@ export class SendMessageComponent implements OnInit {
   roomInfo = { title: '', id: '', created: '', lastActivity: '' };
   selectedRoomsClone: any[] = [];
 
-  constructor(private webex: WebexService) { }
+  constructor(private webex: WebexService, private alertService: AlertService) { }
 
   ngOnInit(): void {
     if (this.webex.webex != undefined) {
@@ -39,13 +40,13 @@ export class SendMessageComponent implements OnInit {
 
   listRooms() {
     this.webex.onListRoom().then((rooms) => {
-      this.rooms = rooms.items.filter(room => room.type == 'group');
+      this.rooms = rooms.items
     })
   }
 
   async sendMessageToSelectedRooms() {
-    this.showAlertMessage = true;
-    this.dialogMessageLoader = true;
+    ///this.showAlertMessage = true;
+   // this.dialogMessageLoader = true;
     this.dialogMessage = 'Sending message to the selected room(s)... Please wait!';
     let roomIds = [];
     this.selectedRooms.forEach((room) => {
@@ -65,19 +66,34 @@ export class SendMessageComponent implements OnInit {
     const validResults = results.filter(result => !(result instanceof Error));
     const invalidResults = results.filter(result => (result instanceof Error));
     this.showOk = true;
-    this.dialogMessageLoader = false;
+    //this.dialogMessageLoader = false;
     if (validResults.length === roomIds.length) {
+      this.alertService.success('Success', 'Message sent successfully to the selected room(s)', {
+        ariaLabel: 'Close Alert',
+        orderNewest: false,
+        onHide: () => console.info('onHide info'),
+      });
       this.dialogMessage = "Message sent successfully to the selected room(s)";
     }
     else {
+      
       let errors: string[] = []
       invalidResults.forEach((invalidResult) => {
         errors.push(invalidResult + '<br>');
       })
-      if (invalidResults.length === roomIds.length) {
+      if (invalidResults.length === roomIds.length) {this.alertService.error('Error', "Unable to send message to the selected Room(s). Please check", {
+        ariaLabel: 'Close Alert',
+        orderNewest: false,
+        onHide: () => console.info('onHide info'),
+      });
         this.dialogMessage = "Unable to send message to the selected room(s): <br>" + errors;
       }
       if (invalidResults.length < roomIds.length) {
+        this.alertService.error('Error', "Unable to send message to few of the selected Room(s). Please check", {
+          ariaLabel: 'Close Alert',
+          orderNewest: false,
+          onHide: () => console.info('onHide info'),
+        });
         this.dialogMessage = "Unable to send message to few of the requested room(s).<br> The following actions failed: <br>" + errors;
       }
     }

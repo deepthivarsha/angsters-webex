@@ -1,5 +1,5 @@
-<md-modal sizeType="large">
-    <md-modal-header headerLabel="Modify Rooms">
+<md-modal backdrop="backdrop" sizeType="large">
+    <md-modal-header headerLabel="Modify Rooms"  showCloseButton="showClose">
     </md-modal-header>
     <md-modal-body class="md-modal__body md-modal__body--padding">
         <!--<div><a>create room</a><hr style="width:40%"><a>add members</a><hr style="width:40%"><a>send message</a></div>-->
@@ -69,16 +69,10 @@
     <md-modal-footer>
       <button
         type="button"
-        class="md-button md-button--red pull-right"
+        class="md-button md-button--red pull-right" (click)="cancel()"
       >
         <span >cancel</span>
       </button>
-      <button
-        type="button"
-        class="md-button pull-right"
-        id="ecp-remove-cluster-close"
-        
-      >next</button>
     </md-modal-footer>
   </md-modal>
   
