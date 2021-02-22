@@ -121,6 +121,17 @@
                        
                        <div class="col-sm-4">
                        <md-card style="width:430px;height:400px;">
+                        <md-card-section>
+                          <header class="md-top-bar md-top-bar--blue" role="navigation">
+                            <div class="md-top-bar__container">
+                              <div class="md-top-bar__brand">
+                                <a class="md-brand" href="/">
+                                  <div class="md-brand__title">Spaces/Direct</div>
+                                </a>
+                              </div>
+                            </div>
+                          </header>
+                        </md-card-section>
                             <md-card-section>
                          
                                     <div class="md-input-container md-search-input md-margin__top md-padding__left" style="display: flex;">
@@ -159,23 +170,41 @@
                          <div class="col-sm-4">
                           <md-card style="height:380px;width:1100px">
                             <md-card-section>
-                               <div><h4>{{selectedRoom.title}}</h4></div><button (click)="joining()"
-                                class="md-button md-button--circle md-button--44 md-button--green"
-                                alt="answer call with voice and video"
-                                type="button"
-                                aria-label="answer call with voice and video" t
-                                abindex="0">
-                                <span class="md-button__children">
-                                  <i class="icon icon-camera_24"></i>
-                                </span>
-                              </button>
+                              <div>
+                                <header class="md-top-bar md-top-bar--blue" role="navigation">
+                                  <div class="md-top-bar__container">
+                                    <div class="md-top-bar__brand">
+                                      <a class="md-brand" href="/">
+                                        <div class="md-brand__title" style="font-weight: bolder;">{{selectedRoom.title}}</div>
+                                      </a>
+                                    </div>
+                                    <nav class="md-top-bar__nav ">
+                                    </nav>
+                                    <div class="md-top-bar__right ">
+                                      <!-- Note: conditionally show top-bar__user or top-bar__logged-out -->
+                                       <div class="md-top-bar__user">
+                                        <button (click)="joining()"
+                                        class="md-button md-button--circle md-button--44 md-button--green"
+                                        alt="answer call with voice and video"
+                                        type="button"
+                                        aria-label="answer call with voice and video" t
+                                        abindex="0">
+                                        <span class="md-button__children">
+                                          <i class="icon icon-camera_24"></i>
+                                        </span>
+                                      </button>
+                                       </div>
+                                    </div>
+                                  </div>
+                                </header>
+                            </div>
                             </md-card-section>
-                            <md-card-section style="overflow-y:scroll;">
+                            <md-card-section style="overflow-y:scroll;" >
                               <md-list *ngFor="let item of listMessages" style="padding:100px;">
                                 <div class="msg-body" [ngStyle]="{ 'direction' : (item.personEmail.toLowerCase() === me.emails[0].toLowerCase()) ? 'rtl' : ''}" >
                                 <div style="font-size: 0.65rem; color: darkgrey;padding:5px;" >{{(item.personEmail.toLowerCase() === me.emails[0].toLowerCase()) ? 'You' : item.personEmail}} sent at {{item.created | date: 'short'}}</div>
-                                <span class="md-badge md-badge--pastel" style="word-wrap:break-word;">
-                                   <div md-list-item class="msg-text" style="font-size: 1.15rem;" [ngStyle]="{'color': (item.personEmail.toLowerCase() === me.emails[0].toLowerCase()) ? 'blue' : ''}"><label class="md-margin msg-holder">
+                                <span style="white-space: pre-line;">
+                                   <div md-list-item class="msg-text md-badge--pastel"  [ngStyle]="{'color': (item.personEmail.toLowerCase() === me.emails[0].toLowerCase()) ? 'blue' : ''}"><label class="md-margin msg-holder">
                                       {{item.text}}
                                     </label><br></div>
                                 </span>
